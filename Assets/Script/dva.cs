@@ -18,6 +18,12 @@ public class dva : MonoBehaviour
     private bool isGrounded = false;
     public GameObject lossMenu;
     private bool isGameOver;
+    private AudioSource audioSource;
+    public AudioClip Sound_01;
+
+   
+
+
 
    
 
@@ -30,6 +36,7 @@ public class dva : MonoBehaviour
        
         targetXPosition = (currentLaneIndex - 1) * laneDistance;
         transform.position = new Vector3(targetXPosition, transform.position.y, transform.position.z);
+        audioSource = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -90,7 +97,8 @@ public class dva : MonoBehaviour
         if (collision.gameObject.CompareTag("obstacle"))
         {
               HandleGameOver();
-            
+              audioSource.PlayOneShot(Sound_01, 1f);
+
         }
     }
 
