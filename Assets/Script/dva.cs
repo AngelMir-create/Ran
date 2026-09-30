@@ -1,11 +1,9 @@
 using UnityEngine;
+using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 
 public class dva : MonoBehaviour
 {
-  
-
-
-    [Header("Настройки движения")]
     public float forwardSpeed = 6f;          
     public float laneSwitchSpeed = 8f;      
     public float laneDistance = 2f;        
@@ -18,6 +16,10 @@ public class dva : MonoBehaviour
     private Vector3 velocity;
     private float gravity = -9.81f;
     private bool isGrounded = false;
+    public GameObject lossMenu;
+    private bool isGameOver;
+
+   
 
     void Start()
     {
@@ -45,7 +47,6 @@ public class dva : MonoBehaviour
             newPos.x = smoothX;
             transform.position = newPos;
 
-            
             if (Mathf.Abs(smoothX - targetXPosition) < 0.05f)
             {
                 isChangingLane = false;
@@ -53,7 +54,6 @@ public class dva : MonoBehaviour
             }
         }
     }
-
     void Update()
     {
         isGrounded = controller.isGrounded;
@@ -73,12 +73,9 @@ public class dva : MonoBehaviour
             ChangeLane(+1);
         }
     }
-
     void ChangeLane(int direction)
     {
         int newLane = currentLaneIndex + direction;
-
-        
         newLane = Mathf.Clamp(newLane, 0, 2);
 
         if (newLane != currentLaneIndex)
@@ -88,6 +85,28 @@ public class dva : MonoBehaviour
             isChangingLane = true;
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("obstacle"))
+        {
+              HandleGameOver();
+            
+        }
+    }
+
+    private void HandleGameOver()
+    {
+        isGameOver = true;
+        Time.timeScale = 0f;
+
+        if (lossMenu != null)
+        {
+            lossMenu.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("Не назначена панель lossMenu в инспекторе!");
+        }
+    }
+    
 }
-
-

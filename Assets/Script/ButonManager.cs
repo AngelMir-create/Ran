@@ -30,4 +30,14 @@ public class ButonManager : MonoBehaviour
             Debug.LogWarning("StartMenuPanel не назначен в Инспекторе!");
         }
     }
+
+    public void ButtonRestart()
+    {
+        ResetGame();
+    }
+
+    public void ResetGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
