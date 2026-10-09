@@ -20,12 +20,7 @@ public class dva : MonoBehaviour
     private bool isGameOver;
     private AudioSource audioSource;
     public AudioClip Sound_01;
-
-   
-
-
-
-   
+    public Animator animationCat;
 
     void Start()
     {
@@ -98,6 +93,7 @@ public class dva : MonoBehaviour
         {
               HandleGameOver();
               audioSource.PlayOneShot(Sound_01, 1f);
+             animationCat.SetTrigger("Death");
 
         }
     }
