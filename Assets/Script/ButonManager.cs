@@ -4,13 +4,12 @@ using UnityEngine.SceneManagement;
 public class ButonManager : MonoBehaviour
 {
     public GameObject startMenuPanel;
-    private AudioSource audioSource;
-    public AudioClip Sound_01;
 
-    void Start()
+    private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        
         Time.timeScale = 0f;
+
     }
 
     public void OnStartButtonClicked()
@@ -25,7 +24,6 @@ public class ButonManager : MonoBehaviour
         {
             startMenuPanel.SetActive(false);
             Time.timeScale = 1f;
-            audioSource.PlayOneShot(Sound_01, 1f);
         }
         else
         {
@@ -41,6 +39,5 @@ public class ButonManager : MonoBehaviour
     public void ResetGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        audioSource.PlayOneShot(Sound_01, 1f);
     }
 }
