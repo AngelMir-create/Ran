@@ -20,12 +20,7 @@ public class dva : MonoBehaviour
     private bool isGameOver;
     private AudioSource audioSource;
     public AudioClip Sound_01;
-
-   
-
-
-
-   
+    public Animator animatorCat;
 
     void Start()
     {
@@ -37,6 +32,7 @@ public class dva : MonoBehaviour
         targetXPosition = (currentLaneIndex - 1) * laneDistance;
         transform.position = new Vector3(targetXPosition, transform.position.y, transform.position.z);
         audioSource = GetComponent<AudioSource>();
+        animatorCat.SetBool("Jump", true);
     }
 
     void FixedUpdate()
